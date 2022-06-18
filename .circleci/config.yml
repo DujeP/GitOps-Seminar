@@ -3,18 +3,19 @@ version: 2.1
 workflows:
   test-env-vars:
     jobs:
-      - build
+      - build:
+          context: my_context_name # has an env var called MY_ENV_VAR
 
 jobs:
   build:
     docker:
       - image: cimg/base:2021.11
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          username: duje.popovic@yahoo.com 
+          password: youshallnotpass1
     steps:
       - checkout
       - run:
-          name: "echo an env var that is part of our project"
+          name: "echo an env var that is part of our context"
           command: |
-            echo $MY_ENV_VAR # this env var must be set within the project
+            echo $MY_ENV_VAR
